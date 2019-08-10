@@ -77,7 +77,8 @@ public class DrawOverApps extends CordovaPlugin {
 
 								}
 		            return true;
-	        }
+	        		}
+
 					else if (action.equals(ACTION_OPEN_OVER_APP_VIEW)) {
 
 								if (checkDrawOverAppsPermission(activity)) {
