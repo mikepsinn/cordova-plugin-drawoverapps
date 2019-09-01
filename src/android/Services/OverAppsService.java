@@ -94,10 +94,17 @@ import java.util.Date;
          });
          webViewSettings();
 
+         int LAYOUT_FLAG;
+         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+             LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+         } else {
+             LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+         }
+
          params_head_float = new WindowManager.LayoutParams(
                  WindowManager.LayoutParams.WRAP_CONTENT,
                  WindowManager.LayoutParams.WRAP_CONTENT,
-                 WindowManager.LayoutParams.TYPE_PHONE,
+                 LAYOUT_FLAG,
                  WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                  PixelFormat.TRANSLUCENT);
          params_head_float.gravity = Gravity.CENTER_VERTICAL | Gravity.RIGHT;
@@ -105,7 +112,7 @@ import java.util.Date;
          params_head_view = new WindowManager.LayoutParams();
          params_head_view.width = WindowManager.LayoutParams.WRAP_CONTENT;
          params_head_view.height = WindowManager.LayoutParams.WRAP_CONTENT;
-         params_head_view.type = WindowManager.LayoutParams.TYPE_PHONE;
+         params_head_view.type = LAYOUT_FLAG;
          params_head_view.format = PixelFormat.TRANSLUCENT;
                 
          adjustWebViewGravity();
