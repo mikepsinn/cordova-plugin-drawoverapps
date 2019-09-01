@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -212,16 +213,22 @@ import java.util.Date;
 
          if (visible)
          {
+             int LAYOUT_FLAG;
+             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                 LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+             } else {
+                 LAYOUT_FLAG = WindowManager.LayoutParams.TYPE_PHONE;
+             }
              params_key_dispature = new WindowManager.LayoutParams(
                      WindowManager.LayoutParams.WRAP_CONTENT,
                      WindowManager.LayoutParams.WRAP_CONTENT,
-                     WindowManager.LayoutParams.TYPE_PHONE,
+                     LAYOUT_FLAG,
                      WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
                      PixelFormat.TRANSLUCENT);
              params_key_dispature.gravity = Gravity.CENTER;
 
              //This one is necessary.
-             params_key_dispature.type = WindowManager.LayoutParams.TYPE_PHONE;
+             params_key_dispature.type = LAYOUT_FLAG;
              // Play around with these two.
              params_key_dispature.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL;
              //ll_lp.flags = ll_lp.flags | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
